@@ -7,7 +7,7 @@ public Plugin myinfo =
     name = "Simple Deathmatch",
     author = "bilxdi",
     description = "Simple Deathmatch Gamemode for CS Source",
-    version = "1.0",
+    version = "1.1",
     url = "https://github.com/bilxdi/cssource-smplugin-simpledeathmatch"
 };
 
@@ -101,20 +101,28 @@ public Action GiveWeapon(Event event, const char[] name, bool dontBroadcast) {
 		"weapon_fiveseven"
 	}
 
-	// If client secondary is not empty, remove the secondary
+	// If client primary is not empty, remove the primary, uncomment to activate
+	// int weapon = GetPlayerWeaponSlot(client, 0); // Slot 0 = main
+	// if (weapon != -1) {
+	// 	RemovePlayerItem(client, weapon);
+	// 	RemoveEdict(weapon);
+	// }
+
+	// If client secondary is not empty, remove the secondary, uncomment to activate
 	int weapon2 = GetPlayerWeaponSlot(client, 1); // Slot 1 = secondary
 	if (weapon2 != -1) {
 		RemovePlayerItem(client, weapon2);
 		RemoveEdict(weapon2);
 	}
 
-	GivePlayerItem(client, weapons[GetRandomInt(0, 17)]);
-
 	// Uncomment to give client kevlar
 	// GivePlayerItem(client, "item_kevlar");
 	// Uncomment to give client kevlar helmet
 	// GivePlayerItem(client, "item_assaultsuit");
 
+	// Give primary
+	GivePlayerItem(client, weapons[GetRandomInt(0, 17)]);
+	// Give secondary
 	GivePlayerItem(client, weapons2[GetRandomInt(0, 5)]);
 
 	return Plugin_Continue;
